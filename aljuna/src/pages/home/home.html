@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar align="center">
+      <img src="./assets/imgs/aljuna-putih.png"  alt="logo" height="40">
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-searchbar [(ngModel)]="find" (ionInput)="findBarang($event)" (ionClear)="kecap($event)" ></ion-searchbar>  
+      <ion-item>
+      <ion-label>Kategori</ion-label>
+      <ion-select interface="popover" name="id_kategori" (ionChange)="filterKategori($event)"  #id_kategori>
+        <ion-option  value="" selected>Semua</ion-option>
+        <ion-option *ngFor="let k of kategori" value="{{k.id_kategori}}" >{{k.kategori}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngFor="let b of barang" (click)="getDetail(b)"> 
+      <ion-avatar item-start>
+        <img *ngIf="gambar" src="{{gambar+b.gambar }}">
+      </ion-avatar>
+      <h3>{{ b.nama_barang }}</h3>
+      <p>Rp {{ b.harga }},-</p>
+    </ion-item>
+</ion-content>

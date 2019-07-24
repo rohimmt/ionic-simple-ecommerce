@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Tambah Alamat
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="formgroup">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nama <i style=" font-size: 11px; color: red;" *ngIf="!nama.valid && nama.touched"> *harap
+            isi kolom dengan benar!</i></ion-label>
+        <ion-input type="text" formControlName="nama" maxLength=30 [(ngModel)]="alamat.nama"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Kota <i style=" font-size: 11px; color: red;" *ngIf="!id_kota.valid && id_kota.touched">
+            *harap pilih kota anda!</i></ion-label>
+        <ion-select [(ngModel)]="alamat.id_kota" formControlName="id_kota">
+          <ion-option *ngFor="let kt of kota" value="{{kt.id_kota}}">{{kt.kota}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Alamat <i style=" font-size: 11px; color: red;" *ngIf="!alamat2.valid && alamat2.touched">
+            *harap isi kolom dengan benar!</i></ion-label>
+        <ion-input type="text" formControlName="alamat2" maxLength=255 [(ngModel)]="alamat.alamat"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>No. Telepon <i style=" font-size: 11px; color: red;" *ngIf="!no_telp.valid && no_telp.touched">
+            *harap isi kolom dengan benar!</i></ion-label>
+        <ion-input type="number" formControlName="no_telp" maxLength=13 [(ngModel)]="alamat.no_telp"></ion-input>
+      </ion-item>
+      <button ion-button block [disabled]="!formgroup.valid" (click)="tambah()">Tambahkan</button>
+    </ion-list>
+  </form>

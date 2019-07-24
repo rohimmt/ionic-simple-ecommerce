@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Pengaturan
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="formgroup1">
+    <ion-list ng-repeat="data in ctrl.data" *ngFor="let u of user">
+      <h2 align="center">
+        UBAH USERNAME
+      </h2>
+      <ion-item>
+        <ion-label floating>Username <i style=" font-size: 11px; color: red;" *ngIf="!user1.valid && user1.touched">
+            *harap isi minimal 3 huruf/angka!</i></ion-label>
+        <ion-input type="text" name="username" formControlName="user1" maxLength=30 value="{{u.username}}" #username></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Konfirmasi password <i style=" font-size: 11px; color: red;" *ngIf="!pass.valid && pass.touched">
+            *harap isi minimal 6 huruf/angka!</i></ion-label>
+        <ion-input type="password" name="password" maxLength=255 formControlName="pass" #password></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button block [disabled]="!formgroup1.valid" (click)="ubahUsername()">
+      Simpan
+    </button>
+  </form>
+  <div class="spacer" style="width:350px;height:27px;"></div>
+  <form [formGroup]="formgroup2">
+    <ion-list>
+      <h2 align="center">
+        UBAH PASSWORD
+      </h2>
+      <ion-item>
+        <ion-label floating>Password baru <i style=" font-size: 11px; color: red;" *ngIf="!pass1.valid && pass1.touched">*harap isi minimal<br> 6 huruf/angka!</i></ion-label>
+        <ion-input type="password" name="password1" maxLength=255 formControlName="pass1" #password1></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Konfirmasi password baru <i style=" font-size: 11px; color: red;" *ngIf="!pass2.valid && pass2.touched">*harap isi minimal<br> 6 huruf/angka!</i></ion-label>
+        <ion-input type="password" formControlName="pass2" name="password2" maxLength=255  #password2></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Konfirmasi password lama <i style=" font-size: 11px; color: red;" *ngIf="!pass3.valid && pass3.touched">*harap isi minimal<br> 6 huruf/angka!</i></ion-label>
+        <ion-input type="password" name="password3" maxLength=255 formControlName="pass3" #password3></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button block [disabled]="!formgroup2.valid" (click)="ubahPassword()">
+      Ubah Passsword
+    </button>.
+  </form>
+</ion-content>

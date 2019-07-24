@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Riwayat Pesanan
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-row>
+        <button ion-item *ngFor="let p of pesanan" (click)="goToRekap(p)">
+          <h2>{{p.waktu | date: "dd/MM/yyyy - HH:mm"}}</h2>
+          <p *ngIf="p.status == 1">Status : Menunggu Pembayaran</p>
+          <p *ngIf="p.status == 2">Status : Diproses</p>
+          <p *ngIf="p.status == 3">Status : Dikirim</p>
+          <p *ngIf="p.status == 4">Status : Selesai</p>
+          <p *ngIf="p.status == 5">Status : Batal</p>
+          <p *ngIf="p.status == 6">Status : Batal</p>
+          <p *ngIf="p.status == 7">Status : Bukti Pembayaran Salah</p>
+        </button>
+    </ion-row>
+  </ion-list>
+</ion-content>

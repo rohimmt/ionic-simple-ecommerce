@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Rekap Pesanan
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div>
+      <p>Waktu Pesan : <strong>{{value.waktu | date: "dd/MM/yyyy - HH:mm"}} WIB</strong></p>
+    <p>
+      Status :
+      <strong *ngIf="value.status == 1">Menunggu Pembayaran</strong>
+      <strong *ngIf="value.status == 2">Diproses</strong>
+      <strong *ngIf="value.status == 3">Dikirim</strong>
+      <strong *ngIf="value.status == 4">Selesai</strong>
+      <strong *ngIf="value.status == 5">Batal</strong>
+    </p>
+  </div>
+  <ion-list>
+    <ion-item ng-repeat="data in ctrl.data" *ngFor="let b of barang">
+      <ion-avatar item-start>
+        <img src="{{ urlpesanan+b.gambar }}">
+      </ion-avatar>
+      <ion-grid class="grid-basic-page">
+        <ion-row>
+          <h3>{{ b.nama_barang }}</h3>
+          <p col-4>Jumlah : {{ b.jumlah }}</p>
+          <p col-8 align="right">Rp {{ b.harga }},-</p>
+          <p col-4><b>Subtotal : </b></p>
+          <p col-8 align="right"><b>Rp {{ b.harga*b.jumlah }},-</b></p>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item *ngIf="value">
+      <ion-grid class="grid-basic-page">
+        <ion-row>
+          <p col-8>Subtotal untuk produk</p>
+          <p col-4 align="right">Rp {{value.subtotal}},-</p>
+          <p col-8>Total ongkos kirim</p>
+          <p col-4 align="right">Rp {{value.subtotalongkir}},-</p>
+          <p col-6><b>Total pembayaran</b></p>
+          <p col-6 align="right"><b>Rp {{value.total}},-</b></p>
+        </ion-row>
+      </ion-grid>
+      <br>
+      <div *ngIf="value.status == 1 || value.status == 2" align="center">
+        <p>Segera transfer sejumlah : Rp {{value.total}},-</p>
+        <p>ke rekening BCA : <strong>123 123 1234</strong></p>
+        <p>A.n. <strong>Danang Dwi Asmoro</strong></p>
+        <br>
+        <p>*Jasa pengiriman menggunakan J&T</p>
+        <br>
+      </div>
+      <div align="center" *ngIf="value.status == 3">
+        <p>Pesanan sedang dikirim.</p>
+        <p>Cek status pengiriman melalui web :</p>
+        <p><a href="http://www.jet.co.id/track">http://www.jet.co.id/track</a></p>
+        <br>
+      </div>
+      <div align="center" *ngIf="value.status == 4">
+        <p>Pesanan telah sampai.</p>
+        <p>Cek status pengiriman melalui web :</p>
+        <p><a href="http://www.jet.co.id/track">http://www.jet.co.id/track</a></p>
+        <br>
+      </div>
+      <div *ngIf="value.status == 3 || value.status == 4">
+        <p *ngIf="value.status == 3 || value.status == 4">Nomor resi : <b>{{value.resi}}</b></p>
+        <br>
+      </div>
+      <div *ngIf="value.status == 1 || value.status == 2">
+        <p><button ion-button outline small (click)="pilih()">Ambil gambar</button>*bukti pembayaran</p>
+        <p align="center" *ngIf="value.bukti && bukti==null"><img src="{{ urlbukti+value.bukti }}"></p>
+        <p align="center "><img src="{{ bukti }}"></p>
+      </div>
+    </ion-item>
+    <button *ngIf="value.status == 1 || value.status == 2" ion-button block (click)="unggah()">
+      Unggah
+    </button>
+    <button *ngIf="value.status == 1 || value.status == 2" ion-button outline block (click)="batal()">
+      Batalkan
+    </button>
+    <button *ngIf="value.status == 3 || value.status == 4 || value.status == 5"  ion-button block (click)="ok()">
+      OK
+    </button>
+  </ion-list>
+</ion-content>

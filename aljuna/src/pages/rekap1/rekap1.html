@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Rekap Pesanan
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list *ngFor="let p of pesanan" class="wrapping-list">
+    <div>
+      <p>Waktu Pesan : <strong>{{p.waktu | date: "dd/MM/yyyy - HH:mm"}} WIB</strong></p>
+      <p>
+        Status :
+        <strong *ngIf="p.status == 1">Menunggu Pembayaran</strong>
+        <strong *ngIf="p.status == 2">Diproses</strong>
+        <strong *ngIf="p.status == 3">Dikirim</strong>
+        <strong *ngIf="p.status == 4">Selesai</strong>
+        <strong *ngIf="p.status == 5">Batal</strong>
+        <strong *ngIf="p.status == 6">Batal</strong>
+        <strong *ngIf="p.status == 7">Bukti Pembayaran Salah</strong>
+      </p>
+    </div>
+    <ion-item ng-repeat="data in ctrl.data" *ngFor="let b of barang">
+      <ion-avatar item-start>
+        <img src="{{ urlpesanan+b.gambar }}">
+      </ion-avatar>
+      <ion-grid class="grid-basic-page">
+        <ion-row>
+          <h3>{{ b.nama_barang }}</h3>
+          <p col-4>Jumlah : {{ b.jumlah }}</p>
+          <p col-8 align="right">Rp {{ b.harga }},-</p>
+          <p col-4><b>Subtotal : </b></p>
+          <p col-8 align="right"><b>Rp {{ b.harga*b.jumlah }},-</b></p>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid class="grid-basic-page">
+        <ion-row>
+          <p col-8>Subtotal untuk produk</p>
+          <p col-4 align="right">Rp {{p.subtotal}},-</p>
+          <p col-8>Total ongkos kirim</p>
+          <p col-4 align="right">Rp {{p.subtotalongkir}},-</p>
+          <p col-6><b>Total pembayaran</b></p>
+          <p col-6 align="right"><b>Rp {{p.total}},-</b></p>
+        </ion-row>
+      </ion-grid>
+      <br>
+      <div *ngIf="p.status == 1 || p.status == 2 || p.status == 7" align="center">
+        <p>Segera transfer sejumlah : <strong>{{p.total}},-</strong></p>
+        <p>ke rekening BCA : <strong>123 123 1234</strong></p>
+        <p>A.n. <strong>Danang Dwi Asmoro</strong></p>
+        <br>
+        <p>*Jasa pengiriman menggunakan J&T</p>
+        <br>
+      </div>
+      <div *ngIf="p.status != 5" text-wrap>
+        <p align="center">Dikirim ke :</p>
+          <p>Nama : {{p.nama}}</p>
+          <p>Alamat : {{p.alamat}}</p>
+          <p>Kota : {{p.kota}}</p>
+          <p>No. Telp. : {{p.no_telp}}</p>
+          <br>
+        </div>
+      <div align="center" *ngIf="p.status == 3">
+        <p>Pesanan sedang dikirim.</p>
+        <p *ngIf="p.status == 4">Pesanan telah sampai.</p>
+        <p>Cek status pengiriman melalui web :</p>
+        <p><a href="http://www.jet.co.id/track">http://www.jet.co.id/track</a></p>
+        <br>
+      </div>
+      <div align="center" *ngIf="p.status == 4">
+        <p>Pesanan telah sampai.</p>
+        <p>Cek status pengiriman melalui web :</p>
+        <p><a href="http://www.jet.co.id/track">http://www.jet.co.id/track</a></p>
+        <br>
+      </div>
+      <div *ngIf="p.status == 3 || p.status == 4">
+        <p>Nomor resi : <b>{{p.resi}}</b></p>
+        <br>
+      </div>
+      <div *ngIf="p.status == 1 || p.status == 2 || p.status == 7">
+        <p class="wrapping-list">*Unggah bukti pembayaran sebelum 24 jam!</p>
+        <p><button ion-button outline small (click)="pilih()">Ambil gambar</button>*bukti pembayaran</p>
+        <p align="center" *ngIf="p.bukti && bukti==null"><img src="{{ urlbukti+p.bukti }}"></p>
+        <p align="center "><img src="{{ bukti }}"></p>
+      </div>
+    </ion-item>
+    <button *ngIf="p.status == 1 || p.status == 2 || p.status == 7" ion-button block (click)="unggah(p)">
+      Unggah
+    </button>
+    <button *ngIf="p.status == 1 || p.status == 2 || p.status == 7" ion-button outline block (click)="batal()">
+      Batalkan
+    </button>
+    <button *ngIf="p.status == 3" ion-button block (click)="terima()">
+      Terima Barang
+    </button>
+    <button ion-button block (click)="ok()" outline>
+      OK
+    </button>
+  </ion-list>
+</ion-content>

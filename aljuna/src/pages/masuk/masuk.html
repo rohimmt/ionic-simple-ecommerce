@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Masuk
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form [formGroup]="formgroup">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Username <i style=" font-size: 11px; color: red;" *ngIf="!user.valid && user.touched"> *harap isi minimal 3 huruf/angka!</i></ion-label> 
+        <ion-input type="text" formControlName="user" name="username" maxLength=30 #username></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password <i style=" font-size: 11px; color: red;" *ngIf="!pass.valid && pass.touched"> *harap isi minimal 6 huruf/angka!</i></ion-label>
+        <ion-input type="password" formControlName="pass" name="password" maxLength=255 #password></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="spacer" style="width:300px;height:16px;"></div>
+    <button ion-button block [disabled]="!formgroup.valid" (click)="masuk()">
+      Masuk
+    </button>
+  </form>
+  <button ion-button clear block (click)="goToDaftar()">
+    Buat akun baru
+  </button>
+</ion-content>

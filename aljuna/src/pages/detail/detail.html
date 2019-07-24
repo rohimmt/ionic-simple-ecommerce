@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Detail
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding *ngIf="value">
+  <ion-card id="Detail-card21">
+    <img *ngIf="gambar" src="{{gambar+value.gambar }}">
+  </ion-card>
+  <ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <h6><b> {{ value.nama_barang }}</b></h6>
+        </ion-col>
+        <ion-item>
+          Rp {{ value.harga }},-
+          <ion-note item-end>
+            Stok : {{ value.stok }} {{ value.satuan }}
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          Berat :
+          <ion-note item-end>
+            {{ value.berat }} gram
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          Kategori :
+          <ion-note item-end>
+            {{ value.kategori }}
+          </ion-note>
+        </ion-item>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>Jumlah</ion-label>
+      <ion-select interface="popover" [(ngModel)]="jumlah">
+        <ion-option *ngFor="let jml of getStok(value.stok); let idx = index" value="{{jml}}" selected="{{(idx==0).toString()}}"
+          required>{{jml}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <button (click)="tambahKeTroli()" [disabled]="jumlah == 0" ion-button block icon-left>
+    <ion-icon name="cart"></ion-icon>
+    Tambah ke Troli
+  </button>
+</ion-content>

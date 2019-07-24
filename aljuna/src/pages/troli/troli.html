@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Troli
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page4">
+  <ion-list>
+    <ion-row>
+      <ion-item-sliding ng-repeat="data in ctrl.data" *ngFor="let t of troli">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="{{ gambar+t.gambar }}">
+          </ion-avatar>
+          <ion-grid class="grid-basic-page">
+            <ion-row>
+              <h3>{{ t.nama_barang }}</h3>
+              <p col-4>Jumlah : {{ t.jumlah }}</p>
+              <p col-8 align="right">Rp {{ t.harga }},-</p>
+              <p col-4><b>Subtotal : </b></p>
+              <p col-8 align="right"><b>Rp {{ t.harga*t.jumlah }},-</b></p>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="hapus(t)">
+            <ion-icon name="trash"></ion-icon>
+            Hapus
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-row>
+    <div *ngIf="troli">
+      <ion-item>
+        <ion-label>Alamat Tujuan</ion-label>
+        <ion-select [(ngModel)]="pesanan.id_alamat" (ionChange)="getTroli($event)" #id_alamat>
+          <ion-option *ngFor="let a of alamat" value="{{a.id_alamat}}" >{{a.nama}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-8>Subtotal untuk produk</ion-col>
+          <ion-col col-4 align="right">Rp {{pesanan.subtotal}},-</ion-col>
+          <ion-col col-8>Total ongkos kirim</ion-col>
+          <ion-col col-4 align="right">Rp {{pesanan.subtotalongkir}},-</ion-col>
+          <ion-col col-6><b>Total pembayaran</b></ion-col>
+          <ion-col col-6 align="right" *ngIf="pesanan"><b>Rp {{pesanan.subtotal+pesanan.subtotalongkir}},-</b></ion-col>
+        </ion-row>
+      </ion-grid>
+          <ion-input type="hidden" [(ngModel)]="pesanan.total" #id_alamat></ion-input>
+      <button ion-button block icon-left on-click="goToRekapPesanan()">
+        <ion-icon name="arrow-dropright-circle"></ion-icon>
+        Lanjutkan
+      </button>
+    </div>
+  </ion-list>
+  <p *ngIf="!troli" align="center"><i>~ Troli anda kosong ~</i></p>
+</ion-content>

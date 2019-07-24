@@ -1,0 +1,19 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>trol</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>  
+  <ion-item>
+        <ion-label>Alamat Tujuan</ion-label>
+        <ion-select [(ngModel)]="pesanan.id_kota">
+          <ion-option *ngFor="let a of alamat" value="{{a.id_alamat}}">{{a.nama}} || {{a.alamat}}</ion-option>
+        </ion-select>
+      </ion-item>
+  </ion-list>
+</ion-content>

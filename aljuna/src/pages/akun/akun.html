@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        Akun
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding id="page3">
+
+      <ion-list>
+        <ion-item (click)="goToPengaturan()" id="akun-list-item18">
+          <ion-icon name="settings" item-left></ion-icon>
+          Pengaturan Akun
+        </ion-item>
+        <ion-item  on-click="goToPesanan()" id="akun-list-item25">
+          <ion-icon name="list" item-left></ion-icon>
+          Pesanan
+        </ion-item>
+        <ion-item  on-click="goToAlamat()" id="akun-list-item25">
+          <ion-icon name="ios-send" item-left></ion-icon>
+          List Alamat
+        </ion-item>
+        <div class="spacer" style="width:300px;height:27px;" id="akun-spacer2"></div>
+        <button ion-button full outline (click)="keluar()">Keluar</button>
+        <!-- <button ion-button full outline (click)="rekap1()">Rekap</button> -->
+      </ion-list>
+
+  </ion-content>

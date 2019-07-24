@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      List Alamat
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+      <ion-item-sliding ng-repeat="data in ctrl.data"  *ngFor="let a of data">
+        <ion-item>
+          <h2>{{a.nama}}</h2>
+          <p>{{a.alamat}}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="secondary" (click)="edit(a)">
+            <ion-icon name="build"></ion-icon>
+            Edit
+          </button>
+          <button ion-button color="danger" (click)="hapus(a)">
+            <ion-icon name="trash"></ion-icon>
+            Hapus
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <div class="fab-container">
+    <ion-fab  bottom right edge>
+      <button ion-fab (click)="tambahAlamat()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+    </div>
+ </ion-content>
