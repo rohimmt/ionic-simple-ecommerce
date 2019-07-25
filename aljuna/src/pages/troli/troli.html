@@ -38,6 +38,7 @@
           <ion-option *ngFor="let a of alamat" value="{{a.id_alamat}}" >{{a.nama}}</ion-option>
         </ion-select>
       </ion-item>
+      <button ion-button block clear (click)="tambahAlamat()">Tambah Alamat</button>
       <ion-grid>
         <ion-row>
           <ion-col col-8>Subtotal untuk produk</ion-col>

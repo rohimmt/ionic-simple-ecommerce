@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { Service } from '../service/service';
+import { TambahalamatPage } from '../tambahalamat/tambahalamat';
 import { PesananPage } from '../pesanan/pesanan';
 import { RekapPage } from '../rekap/rekap';
 import { Rekap1Page } from '../rekap1/rekap1';
@@ -136,6 +137,10 @@ export class TroliPage {
       ]
     });
     confirm.present();
+  }
+
+  tambahAlamat(){
+    this.navCtrl.push(TambahalamatPage);
   }
 
 }

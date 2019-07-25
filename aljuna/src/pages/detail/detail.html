@@ -16,20 +16,26 @@
           <h6><b> {{ value.nama_barang }}</b></h6>
         </ion-col>
         <ion-item>
-          Rp {{ value.harga }},-
-          <ion-note item-end>
-            Stok : {{ value.stok }} {{ value.satuan }}
+          Harga :
+          <ion-note item-end  color="dark">
+             Rp {{ value.harga }},-
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          Stok :
+          <ion-note item-end color="dark">
+             {{ value.stok }} {{ value.satuan }}
           </ion-note>
         </ion-item>
         <ion-item>
           Berat :
-          <ion-note item-end>
+          <ion-note item-end color="dark">
             {{ value.berat }} gram
           </ion-note>
         </ion-item>
         <ion-item>
           Kategori :
-          <ion-note item-end>
+          <ion-note item-end color="dark">
             {{ value.kategori }}
           </ion-note>
         </ion-item>
@@ -37,9 +43,9 @@
     </ion-grid>
   </ion-list>
   <ion-list>
-    <ion-item>
-      <ion-label>Jumlah</ion-label>
-      <ion-select interface="popover" [(ngModel)]="jumlah">
+    <ion-item >
+      <ion-label color="dark">Jumlah</ion-label>
+      <ion-select interface="popover" [(ngModel)]="jumlah" color="dark">
         <ion-option *ngFor="let jml of getStok(value.stok); let idx = index" value="{{jml}}" selected="{{(idx==0).toString()}}"
           required>{{jml}}</ion-option>
       </ion-select>
